@@ -1,0 +1,38 @@
+{
+  "name": "rem2px",
+  "version": "1.0.0",
+  "description": "",
+  "targets": {
+    "webext-dev": {
+      "sourceMap": {
+        "inline": true,
+        "inlineSources": true
+      }
+    },
+    "webext-prod": {}
+  },
+  "scripts": {
+  },
+  "scripts": {
+    "start": "parcel src/manifest.json --host localhost --target webext-dev --config @parcel/config-webextension",
+    "build": "parcel build src/manifest.json --target webext-prod --config @parcel/config-webextension",
+    "test": "jest",
+    "lint": "eslint",
+    "check": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allforabit/rem2px.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allforabit/rem2px/issues"
+  },
+  "homepage": "https://github.com/allforabit/rem2px#readme",
+  "devDependencies": {
+    "@parcel/config-webextension": "^2.2.1",
+    "parcel": "^2.2.1"
+  }
+}
