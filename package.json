@@ -35,6 +35,12 @@
     "autoprefixer": "^10.4.2",
     "parcel": "^2.2.1",
     "postcss": "^8.4.5",
+    "prettier": "^2.5.1",
+    "prettier-plugin-tailwindcss": "^0.1.4",
     "tailwindcss": "^3.0.16"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
