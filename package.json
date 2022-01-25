@@ -12,8 +12,6 @@
     "webext-prod": {}
   },
   "scripts": {
-  },
-  "scripts": {
     "start": "parcel src/manifest.json --host localhost --target webext-dev --config @parcel/config-webextension",
     "build": "parcel build src/manifest.json --target webext-prod --config @parcel/config-webextension",
     "test": "jest",
@@ -33,6 +31,10 @@
   "homepage": "https://github.com/allforabit/rem2px#readme",
   "devDependencies": {
     "@parcel/config-webextension": "^2.2.1",
-    "parcel": "^2.2.1"
+    "@types/chrome": "^0.0.177",
+    "autoprefixer": "^10.4.2",
+    "parcel": "^2.2.1",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.16"
   }
 }
