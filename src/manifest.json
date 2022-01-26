@@ -7,6 +7,14 @@
     "scripts": ["background.ts"],
     "persistent": false
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.ts"],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {

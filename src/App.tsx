@@ -1,10 +1,78 @@
 import * as React from 'react'
-/* This example requires Tailwind CSS v2.0+ */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Switch } from '@headlessui/react'
+import clsx from 'clsx'
+import { ChromeMessage, Sender } from './types'
+import { getCurrentTabUId, getCurrentTabUrl } from './chrome-utils'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+function setPageBackgroundColor() {
+  chrome.storage.sync.get('color', ({ color }) => {
+    document.body.style.backgroundColor = color
+  })
+}
+
+async function clickHandler() {
+  // let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+  // const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+  //
+  // chrome.scripting.executeScript({
+  //   target: { tabId: tab.id },
+  //   func: setPageBackgroundColor,
+  // })
+  console.log('Clicked')
+}
+
+export const Home = () => {
+  const [url, setUrl] = useState<string>('')
+  const [responseFromContent, setResponseFromContent] = useState<string>('')
+
+  /**
+   * Get current URL
+   */
+  useEffect(() => {
+    getCurrentTabUrl((url) => {
+      setUrl(url || 'undefined')
+    })
+  }, [])
+
+  const sendTestMessage = () => {
+    const message: ChromeMessage = {
+      from: Sender.React,
+      message: 'Hello from React',
+    }
+
+    getCurrentTabUId((id) => {
+      id &&
+        chrome.tabs.sendMessage(id, message, (responseFromContentScript) => {
+          setResponseFromContent(responseFromContentScript)
+        })
+    })
+  }
+
+  const sendRemoveMessage = () => {
+    const message: ChromeMessage = {
+      from: Sender.React,
+      message: 'delete logo',
+    }
+
+    getCurrentTabUId((id) => {
+      id &&
+        chrome.tabs.sendMessage(id, message, (response) => {
+          setResponseFromContent(response)
+        })
+    })
+  }
+
+  return (
+    <div className="p-3">
+      <button
+        className="rounded bg-black p-3 text-white"
+        onClick={sendRemoveMessage}
+      >
+        Remove logo
+      </button>
+    </div>
+  )
 }
 
 const Example = () => {
@@ -14,20 +82,20 @@ const Example = () => {
     <Switch
       checked={enabled}
       onChange={setEnabled}
-      className={classNames(
+      className={clsx(
         enabled ? 'bg-indigo-600' : 'bg-gray-200',
         'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
       )}
     >
       <span className="sr-only">Use setting</span>
       <span
-        className={classNames(
+        className={clsx(
           enabled ? 'translate-x-5' : 'translate-x-0',
           'pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
         )}
       >
         <span
-          className={classNames(
+          className={clsx(
             enabled
               ? 'opacity-0 duration-100 ease-out'
               : 'opacity-100 duration-200 ease-in',
@@ -50,7 +118,7 @@ const Example = () => {
           </svg>
         </span>
         <span
-          className={classNames(
+          className={clsx(
             enabled
               ? 'opacity-100 duration-200 ease-in'
               : 'opacity-0 duration-100 ease-out',
@@ -73,8 +141,16 @@ const Example = () => {
 
 export function App() {
   return (
-    <h1 className="bg-black p-3 text-white">
-      <Example />
-    </h1>
+    <Home />
+    // <h1 className="flex flex-col gap-4 bg-black p-3 text-white">
+    //   <Example />
+    //   <button
+    //     onClick={() => {
+    //       clickHandler()
+    //     }}
+    //   >
+    //     Fire it!!!
+    //   </button>
+    // </h1>
   )
 }
