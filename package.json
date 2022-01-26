@@ -16,7 +16,8 @@
     "build": "parcel build src/manifest.json --target webext-prod --config @parcel/config-webextension",
     "test": "jest",
     "lint": "eslint",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "tailwindcss": "^3.0.16"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }
