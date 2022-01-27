@@ -69,7 +69,7 @@ export const Home = () => {
         className="rounded bg-black p-3 text-white"
         onClick={sendRemoveMessage}
       >
-        Remove logo
+        Process
       </button>
     </div>
   )

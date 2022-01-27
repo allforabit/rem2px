@@ -9,6 +9,27 @@ const validateSender = (
   return sender.id === chrome.runtime.id && message.from === Sender.React
 }
 
+// https://stackoverflow.com/questions/5558613/replace-words-in-the-body-text
+function replaceInText(element: ChildNode, replacement: string) {
+  for (let node of element.childNodes) {
+    switch (node.nodeType) {
+      case Node.ELEMENT_NODE:
+        replaceInText(node, replacement)
+        break
+      case Node.TEXT_NODE:
+        node.textContent = node.textContent.replace(
+          /\d+(?=rem)/i,
+          (match, rem: number) => {
+            return `${node.textContent} (${rem * 16}px)`
+          },
+        )
+        break
+      case Node.DOCUMENT_NODE:
+        replaceInText(node, replacement)
+    }
+  }
+}
+
 const messagesFromReactAppListener = (
   message: ChromeMessage,
   sender: chrome.runtime.MessageSender,
@@ -21,8 +42,9 @@ const messagesFromReactAppListener = (
   }
 
   if (isValidated && message.message === 'delete logo') {
-    const logo = document.getElementById('chromeLogo')
-    logo?.parentElement?.removeChild(logo)
+    const x = document.body.childNodes
+    replaceInText(document.body, 'hi')
+    console.log('Replaced stuff')
   }
 }
 
