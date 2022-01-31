@@ -1,9 +1,11 @@
 import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Switch } from '@headlessui/react'
 import clsx from 'clsx'
 import { ChromeMessage, Sender } from './types'
 import { getCurrentTabUId, getCurrentTabUrl } from './chrome-utils'
+import { useOperation } from '@effection/react'
+import { fetch } from 'effection'
 
 function setPageBackgroundColor() {
   chrome.storage.sync.get('color', ({ color }) => {
@@ -25,6 +27,11 @@ async function clickHandler() {
 export const Home = () => {
   const [url, setUrl] = useState<string>('')
   const [responseFromContent, setResponseFromContent] = useState<string>('')
+
+  useOperation(function* () {
+    const res = yield fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+    console.log({ res })
+  }, [])
 
   /**
    * Get current URL
