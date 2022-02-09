@@ -1,4 +1,5 @@
 import { ChromeMessage, Sender } from './types'
+import { convert } from './convert/convert'
 
 type MessageResponse = (response?: any) => void
 
@@ -17,12 +18,7 @@ function replaceInText(element: ChildNode, replacement: string) {
         replaceInText(node, replacement)
         break
       case Node.TEXT_NODE:
-        node.textContent = node.textContent.replace(
-          /\d+(?=rem)/i,
-          (match, rem: number) => {
-            return `${node.textContent} (${rem * 16}px)`
-          },
-        )
+        node.textContent = convert(node.textContent)
         break
       case Node.DOCUMENT_NODE:
         replaceInText(node, replacement)
