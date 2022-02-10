@@ -73,7 +73,7 @@ export const Home = () => {
   return (
     <div className="p-3">
       <button
-        className="rounded bg-black p-3 text-white"
+        className="rounded border border-brand p-3 text-dark-grey"
         onClick={sendRemoveMessage}
       >
         Process
@@ -90,15 +90,15 @@ const Example = () => {
       checked={enabled}
       onChange={setEnabled}
       className={clsx(
-        enabled ? 'bg-indigo-600' : 'bg-gray-200',
-        'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
+        enabled ? 'bg-brand' : 'bg-dark-grey',
+        'border-transparent focus:ring-indigo-500 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2',
       )}
     >
       <span className="sr-only">Use setting</span>
       <span
         className={clsx(
           enabled ? 'translate-x-5' : 'translate-x-0',
-          'pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
+          'bg-white pointer-events-none relative inline-block h-5 w-5 transform rounded-full shadow ring-0 transition duration-200 ease-in-out',
         )}
       >
         <span
@@ -111,7 +111,7 @@ const Example = () => {
           aria-hidden="true"
         >
           <svg
-            className="h-3 w-3 text-gray-400"
+            className="text-gray-400 h-3 w-3"
             fill="none"
             viewBox="0 0 12 12"
           >
@@ -134,7 +134,7 @@ const Example = () => {
           aria-hidden="true"
         >
           <svg
-            className="h-3 w-3 text-indigo-600"
+            className="text-indigo-600 h-3 w-3"
             fill="currentColor"
             viewBox="0 0 12 12"
           >
