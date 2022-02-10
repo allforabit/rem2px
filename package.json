@@ -1,0 +1,56 @@
+{
+  "name": "rem2px",
+  "version": "1.0.0",
+  "description": "",
+  "targets": {
+    "webext-dev": {
+      "sourceMap": {
+        "inline": true,
+        "inlineSources": true
+      }
+    },
+    "webext-prod": {}
+  },
+  "scripts": {
+    "start": "parcel src/manifest.json --host localhost --target webext-dev --config @parcel/config-webextension",
+    "build": "parcel build src/manifest.json --target webext-prod --config @parcel/config-webextension",
+    "test": "jest",
+    "lint": "eslint",
+    "check": "tsc --noEmit",
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allforabit/rem2px.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allforabit/rem2px/issues"
+  },
+  "homepage": "https://github.com/allforabit/rem2px#readme",
+  "devDependencies": {
+    "@parcel/config-webextension": "^2.2.1",
+    "@types/chrome": "^0.0.177",
+    "@types/jest": "^27.4.0",
+    "autoprefixer": "^10.4.2",
+    "jest": "^27.5.1",
+    "parcel": "^2.2.1",
+    "postcss": "^8.4.5",
+    "prettier": "^2.5.1",
+    "prettier-plugin-tailwindcss": "^0.1.4",
+    "tailwindcss": "^3.0.16",
+    "ts-jest": "^27.1.3",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@effection/react": "^2.1.2",
+    "@headlessui/react": "^1.4.3",
+    "clsx": "^1.1.1",
+    "effection": "^2.0.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
